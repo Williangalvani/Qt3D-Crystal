@@ -19,10 +19,9 @@
 
 Qt3DRender::QGeometryRenderer *lineObject()
 {
-    Qt3DRender::QGeometryRenderer *mesh = new Qt3DRender::QGeometryRenderer();
-    Qt3DRender::QGeometry *geometry = new Qt3DRender::QGeometry(mesh);
-    Qt3DRender::QBuffer *dataBuffer = new Qt3DRender::QBuffer(Qt3DRender::QBuffer::VertexBuffer,
-                                                              geometry);
+    auto mesh = new Qt3DRender::QGeometryRenderer();
+    auto geometry = new Qt3DRender::QGeometry(mesh);
+    auto dataBuffer = new Qt3DRender::QBuffer(Qt3DRender::QBuffer::VertexBuffer, geometry);
     QVector<QVector3D> vertices;
 
     // Each line need two points.
@@ -56,7 +55,7 @@ Qt3DRender::QGeometryRenderer *lineObject()
 
     dataBuffer->setData(vertexBufferData);
 
-    Qt3DRender::QAttribute *posAttribute = new Qt3DRender::QAttribute();
+    auto posAttribute = new Qt3DRender::QAttribute();
     posAttribute->setAttributeType(Qt3DRender::QAttribute::VertexAttribute);
     posAttribute->setBuffer(dataBuffer);
     posAttribute->setDataType(Qt3DRender::QAttribute::Float);
@@ -95,8 +94,8 @@ int main(int argc, char* argv[])
     auto camController = new Qt3DExtras::QFirstPersonCameraController(root);
     camController->setCamera(camera);
 
-    auto *cube = new Qt3DCore::QEntity();
-    auto *cubeTransform = new Qt3DCore::QTransform();
+    auto cube = new Qt3DCore::QEntity();
+    auto cubeTransform = new Qt3DCore::QTransform();
 
     Qt3DRender::QGeometryRenderer *indicatorMesh = lineObject();
     Qt3DRender::QMaterial *material = new Qt3DExtras::QDiffuseMapMaterial(root);
