@@ -16,6 +16,7 @@
 #include <Qt3DExtras/Qt3DWindow>
 
 #include <QColor>
+#include <QtMath>
 
 Qt3DRender::QGeometryRenderer *lineObject()
 {
@@ -36,12 +37,24 @@ Qt3DRender::QGeometryRenderer *lineObject()
         v.setZ(s/2 - rand() % s);
     }*/
 
-    vertices.append(QVector3D(-20, -20, -20));
-    vertices.append(QVector3D(20, -20, -20));
-    vertices.append(QVector3D(20, -20, -20));
-    vertices.append(QVector3D(20, 20, -20));
-    vertices.append(QVector3D(20, 20, -20));
-    vertices.append(QVector3D(20, 20, 20));
+    for (uint i = 0; i < 2; i++) {
+        int x = qPow(-1, i);
+        for (uint j = 0; j < 2; j++) {
+            int y = qPow(-1, j);
+            for (uint k = 0; k < 2; k++) {
+                int z = qPow(-1, k);
+                vertices.prepend(QVector3D( 20*x, -20*y,  20*z));
+                vertices.prepend(QVector3D(-20*x, -20*y, -20*z));
+                vertices.prepend(QVector3D( 20*x,  20*y, -20*z));
+                vertices.prepend(QVector3D(-20*x,  20*y,  20*z));
+
+                vertices.append(QVector3D(-20*x, -20*y, -20*z));
+                vertices.append(QVector3D( 20*x, -20*y, -20*z));
+                vertices.append(QVector3D(-20*x, -20*y,  20*z));
+                vertices.append(QVector3D(-20*x,  20*y, -20*z));
+            }
+        }
+    }
 
     QByteArray vertexBufferData;
     vertexBufferData.resize(vertices.size() * 3 * sizeof(float));
