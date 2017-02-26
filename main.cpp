@@ -84,7 +84,7 @@ Qt3DRender::QGeometryRenderer *lineObject()
     mesh->setIndexOffset(0);
     mesh->setFirstInstance(0);
     mesh->setVertexCount(vertices.size());
-    mesh->setPrimitiveType(Qt3DRender::QGeometryRenderer::Lines);
+    mesh->setPrimitiveType(Qt3DRender::QGeometryRenderer::LineStrip);
     mesh->setGeometry(geometry);
 
     return mesh;
