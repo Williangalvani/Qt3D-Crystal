@@ -1,3 +1,3 @@
-# LineObject
+# Qt3D-Crystal
 
-A 3D object created from lines using qt3D.
+A custom 3D mesh using Qt3D.
