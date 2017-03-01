@@ -11,6 +11,7 @@
 #include <Qt3DRender/QGeometry>
 
 #include <Qt3DExtras/QPhongMaterial>
+#include <Qt3DExtras/QPerVertexColorMaterial>
 #include <Qt3DExtras/QFirstPersonCameraController>
 #include <Qt3DExtras/QForwardRenderer>
 #include <Qt3DExtras/Qt3DWindow>
@@ -59,10 +60,9 @@ Qt3DRender::QGeometryRenderer *lineObject()
     QVector3D white(1.0f, 1.0f, 1.0f);
 
     QVector<QVector3D> vertices = QVector<QVector3D>()
-            << v0 << n0 << red
-            << v1 << n1 << blue
-            << v2 << n2 << green
-            << v3 << n3 << white;
+            << v0 << v1 << v2 << v3
+            << n0 << n1 << n2 << n3
+            << red << blue << green << white;
 
     float *rawVertexArray = reinterpret_cast<float *>(vertexBufferData.data());
     int idx = 0;
@@ -178,8 +178,9 @@ int main(int argc, char* argv[])
     auto linesTransform = new Qt3DCore::QTransform();
 
     Qt3DRender::QGeometryRenderer *linesMesh = lineObject();
-    auto material = new Qt3DExtras::QPhongMaterial(root);
-    material->setAmbient(QColor(0, 120, 0));
+    //auto material = new Qt3DExtras::QPhongMaterial(root);
+    Qt3DRender::QMaterial *material = new Qt3DExtras::QPerVertexColorMaterial(root);
+    //material->setAmbient(QColor(100,100,100));
 
     lines->addComponent(linesMesh);
     lines->addComponent(material);
